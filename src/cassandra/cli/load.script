@@ -1,0 +1,12 @@
+CREATE KEYSPACE demo WITH
+placement_strategy = 'SimpleStrategy'
+AND strategy_options = {replication_factor:1};
+
+USE demo;
+
+CREATE COLUMN FAMILY user WITH comparator = UTF8Type and column_metadata=[{column_name: company, validation_class: UTF8Type, index_type: KEYS}];
+
+CREATE COLUMN FAMILY tweet
+with comparator = 'CompositeType(UTF8Type,UTF8Type)'
+and key_validation_class = 'UTF8Type'
+and default_validation_class = 'UTF8Type';
